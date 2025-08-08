@@ -30,13 +30,13 @@ describe('AppController', () => {
     it('should return products with correct structure', () => {
       const result = appController.getProducts();
       const firstProduct = result[0];
-      
+
       expect(firstProduct).toHaveProperty('id');
       expect(firstProduct).toHaveProperty('name');
       expect(firstProduct).toHaveProperty('price');
       expect(firstProduct).toHaveProperty('description');
       expect(firstProduct).toHaveProperty('category');
-      
+
       expect(typeof firstProduct.id).toBe('number');
       expect(typeof firstProduct.name).toBe('string');
       expect(typeof firstProduct.price).toBe('number');
@@ -45,4 +45,3 @@ describe('AppController', () => {
     });
   });
 });
-
