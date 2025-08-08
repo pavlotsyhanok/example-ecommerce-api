@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Product } from './product.interface';
 
 @Injectable()
 export class AppService {
@@ -6,3 +7,4 @@ export class AppService {
     return 'Hello World!';
   }
 }
+
