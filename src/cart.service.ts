@@ -18,7 +18,7 @@ export class CartService {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    
+
     this.carts.set(cartId, newCart);
     return newCart;
   }
@@ -34,14 +34,14 @@ export class CartService {
   addToCart(cartId: string, productId: number, quantity: number): Cart {
     const cart = this.getCart(cartId);
     const product = this.databaseService.getProductById(productId);
-    
+
     if (!product) {
       throw new NotFoundException(`Product with ID ${productId} not found`);
     }
 
     // Check if product already exists in cart
     const existingItemIndex = cart.items.findIndex(
-      item => item.product.id === productId,
+      (item) => item.product.id === productId,
     );
 
     if (existingItemIndex !== -1) {
@@ -58,15 +58,15 @@ export class CartService {
 
     // Update cart total and timestamp
     this.updateCartTotals(cart);
-    
+
     return cart;
   }
 
   updateCartItem(cartId: string, productId: number, quantity: number): Cart {
     const cart = this.getCart(cartId);
-    
+
     const itemIndex = cart.items.findIndex(
-      item => item.product.id === productId,
+      (item) => item.product.id === productId,
     );
 
     if (itemIndex === -1) {
@@ -85,15 +85,15 @@ export class CartService {
 
     // Update cart total and timestamp
     this.updateCartTotals(cart);
-    
+
     return cart;
   }
 
   removeFromCart(cartId: string, productId: number): Cart {
     const cart = this.getCart(cartId);
-    
+
     const itemIndex = cart.items.findIndex(
-      item => item.product.id === productId,
+      (item) => item.product.id === productId,
     );
 
     if (itemIndex === -1) {
@@ -107,18 +107,18 @@ export class CartService {
 
     // Update cart total and timestamp
     this.updateCartTotals(cart);
-    
+
     return cart;
   }
 
   clearCart(cartId: string): Cart {
     const cart = this.getCart(cartId);
-    
+
     cart.items = [];
-    
+
     // Update cart total and timestamp
     this.updateCartTotals(cart);
-    
+
     return cart;
   }
 
@@ -126,7 +126,7 @@ export class CartService {
     if (!this.carts.has(cartId)) {
       throw new NotFoundException(`Cart with ID ${cartId} not found`);
     }
-    
+
     this.carts.delete(cartId);
   }
 
