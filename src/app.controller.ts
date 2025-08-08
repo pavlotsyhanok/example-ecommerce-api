@@ -10,5 +10,11 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('products')
+  getProducts(): Product[] {
+    return this.appService.getProducts();
+  }
 }
+
 
