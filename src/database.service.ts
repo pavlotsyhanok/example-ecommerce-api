@@ -21,7 +21,7 @@ export class DatabaseService {
     try {
       const databasePath = join(process.cwd(), 'database.json');
       const databaseContent = readFileSync(databasePath, 'utf8');
-      this.database = JSON.parse(databaseContent);
+      this.database = JSON.parse(databaseContent) as Database;
     } catch (error) {
       console.error('Failed to load database:', error);
       // Fallback to empty database
@@ -34,7 +34,7 @@ export class DatabaseService {
   }
 
   getProductById(id: number): Product | undefined {
-    return this.database.products.find(product => product.id === id);
+    return this.database.products.find((product) => product.id === id);
   }
 
   getCategories(): Category[] {
@@ -42,6 +42,6 @@ export class DatabaseService {
   }
 
   getCategoryByName(name: string): Category | undefined {
-    return this.database.categories.find(category => category.name === name);
+    return this.database.categories.find((category) => category.name === name);
   }
 }
