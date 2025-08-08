@@ -14,7 +14,8 @@ async function bootstrap() {
   });
 
   const configService = app.get(ConfigService);
-  const port = configService.get<number>('port', 3000);
+  // Use port 12000 for runtime environment or fallback to config
+  const port = process.env.PORT || configService.get<number>('port', 12000);
   const apiPrefix = configService.get<string>('apiPrefix', 'api/v1');
 
   // Global prefix
@@ -46,6 +47,7 @@ async function bootstrap() {
     .addTag('products', 'Product management endpoints')
     .addTag('users', 'User management endpoints')
     .addTag('orders', 'Order management endpoints')
+    .addTag('categories', 'Category management endpoints')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
