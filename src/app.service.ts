@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Product } from './product.interface';
+import { Category } from './category.interface';
 
 @Injectable()
 export class AppService {
@@ -49,5 +50,23 @@ export class AppService {
         category: 'clothing',
       },
     ];
+  }
+
+  getCategories(): Category[] {
+    const products = this.getProducts();
+    const categoryMap = new Map<string, number>();
+    
+    // Count products in each category
+    products.forEach(product => {
+      const count = categoryMap.get(product.category) || 0;
+      categoryMap.set(product.category, count + 1);
+    });
+    
+    // Convert to Category objects
+    return Array.from(categoryMap.entries()).map(([name, count]) => ({
+      id: name.toLowerCase().replace(/\s+/g, '-'),
+      name: name.charAt(0).toUpperCase() + name.slice(1), // Capitalize first letter
+      productCount: count
+    }));
   }
 }
