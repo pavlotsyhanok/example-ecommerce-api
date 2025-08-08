@@ -5,7 +5,14 @@ import { Category } from './category.interface';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World!';
+    return 'Welcome to the E-commerce API! Visit /api/v1/docs for API documentation.';
+  }
+
+  getHealth(): { status: string; timestamp: string } {
+    return {
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+    };
   }
 
   getProducts(): Product[] {

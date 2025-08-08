@@ -12,9 +12,9 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('products')
-  getProducts(): Product[] {
-    return this.appService.getProducts();
+  @Get('health')
+  getHealth(): { status: string; timestamp: string } {
+    return this.appService.getHealth();
   }
 
   @Get('categories')
